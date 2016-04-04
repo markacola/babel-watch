@@ -94,7 +94,7 @@ function processAndRestart(file) {
   if (watcherInitialized && childApp) {
     // kill app early as `compile` may take a while
     console.log(">>> RESTARTING <<<");
-    childApp.kill('SIGHUP');
+    childApp.kill('SIGINT');
     childApp = undefined;
   }
   let absoluteFile = path.join(cwd, file);
@@ -117,7 +117,7 @@ function processAndRestart(file) {
 
 function restartApp() {
   if (childApp) {
-    childApp.kill('SIGHUP');
+    childApp.kill('SIGINT');
     childApp = undefined;
   }
   if (Object.keys(errors).length != 0) {
